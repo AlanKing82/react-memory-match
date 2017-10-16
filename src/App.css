@@ -1,0 +1,204 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+
+
+
+/* Memory sort */
+.memory-wrap * {box-sizing: border-box;}
+.memory-wrap {overflow: hidden;}
+.memory-game {
+    /*display: none;*/
+    height: 180px;
+    float: left;
+    /* stop show animation from exceeding boundaries*/
+    width: 625px;
+    -webkit-transform-style: preserve-3d;
+              transform-style: preserve-3d;
+    -webkit-perspective: 500px;
+              perspective: 500px;
+}
+
+.card {
+  float: left;
+  height: 50%;
+  text-align: center;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  z-index: 50;
+  -webkit-perspective: 500px;
+  perspective: 500px;
+  -webkit-tap-highlight-color: transparent;
+  padding:0px 1px;
+
+
+  /*added*/
+  width:60px;
+  height:60px;
+  background-color:aqua;
+    margin:10px;
+}
+
+.card .inside {
+ /* width: 100%;*/
+  height: 100%;
+  display: block;
+  background: transparent;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: .4s ease-in-out;
+  transition: .4s ease-in-out;
+}
+
+.card .front, .card .back{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  text-align: center;
+  display: block;
+  line-height: 125%;
+  border-radius: .5em;
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+}
+
+.card .front img, .card .back img{
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  /* overwrite img styles */    
+  float: none;
+  position: static;
+}
+
+.card .front{
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+}
+
+.card .inside.picked, .card .inside.matched{
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.card .inside .front p{
+    position: absolute;
+    top: 15%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    margin: auto;
+}
+
+.card .inside .front p,
+.card .inside .front, 
+.card .inside.picked .back{
+    filter: alpha(opacity=0);
+    opacity:0;
+    transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
+.card .inside.picked .front,
+.card .inside.picked .front p,
+.card .inside .back{
+    filter: alpha(opacity=100);
+    opacity:1;
+    transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
+.inside.matched .back,
+.inside.matched .back img{
+    filter: alpha(opacity=0);
+    opacity:0;
+}
+
+.card .inside.matched .front,
+.card .inside.matched .front p{
+    filter: alpha(opacity=100);
+    opacity:1;
+}
+
+.card .inside.matched{
+    -webkit-animation: 1s matchAnim ease-in-out;
+            animation: 1s matchAnim ease-in-out;
+    -webkit-animation-delay: .4s;
+            animation-delay: .4s;
+    
+}
+
+@-webkit-keyframes matchAnim {
+    0% {
+        background: #bcffcc;
+    }
+    100% {
+        background: transparent;
+    }
+}
+
+@keyframes matchAnim {
+    0% {
+        background: #bcffcc;
+    }
+    100% {
+        background-color:#ececec;
+    }
+}
+
+.card.cardBottom .inside.matched,
+.card.cardTop .inside.matched{
+    background-color:#ececec;
+}
+
+.card.cardBottom .inside.matched{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.card.cardTop .inside.matched{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.cardInactive img{
+    opacity:0.3;
+    filter: alpha(opacity=30); /* For IE8 and earlier */
+    transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
